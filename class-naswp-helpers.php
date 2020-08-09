@@ -28,6 +28,12 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
+		public function mimes($formats_array)
+		{
+			require_once "class-naswp-mimes.php";
+			$mimes = new NasWP_Mimes($formats_array);
+			$mimes->init();
+		}
 
 		public function protected_member($protected_prefix = false)
 		{
