@@ -28,6 +28,14 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
+
+		public function protected_member($protected_prefix = false)
+		{
+			require_once "class-naswp-protected-member.php";
+			$protected_member = new NasWP_Protected_Member($protected_prefix);
+			$protected_member->init();
+		}
+
 		public function seo()
 		{
 			require_once "class-naswp-seo.php";
