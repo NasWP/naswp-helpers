@@ -35,6 +35,27 @@ if (!class_exists('NasWP_Helpers')) {
 			$async->init();
 		}
 
+		public function colors($colors = [], $allow_custom_colors = false, $gradients = [], $allow_custom_gradients = false)
+		{
+
+			if (empty($colors)) {
+				$colors = $this->_get_value_from_config('colors', 'array');
+			}
+			if (!$allow_custom_colors) {
+				$allow_custom_colors = $this->_get_value_from_config('allow_custom_colors', 'boolean', true);
+			}
+			if (empty($gradients)) {
+				$gradients = $this->_get_value_from_config('gradients', 'array', null);
+			}
+			if (!$allow_custom_gradients) {
+				$allow_custom_gradients = $this->_get_value_from_config('allow_custom_gradients', 'boolean', true);
+			}
+
+			require_once "class-naswp-colors.php";
+			$colors_obj = new NasWP_Colors($colors, $allow_custom_colors, $gradients, $allow_custom_gradients);
+			$colors_obj->init();
+		}
+
 		public function file_names()
 		{
 			require_once "class-naswp-file-names.php";
