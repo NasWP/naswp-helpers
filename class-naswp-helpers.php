@@ -28,6 +28,11 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
+		/**
+		 * Allow selected mime types.
+		 * @param array $formats_array Mime types keyed by the file extension regex corresponding to those types. Could by passed in config file.
+		 * @return void
+		 */
 		public function mimes($formats_array = [])
 		{
 
@@ -54,20 +59,30 @@ if (!class_exists('NasWP_Helpers')) {
 			$seo->init();
 		}
 
-		public function sitemap($cpts = ['post', 'page'])
+		/**
+		 * Generate sitemap for selected post types.
+		 * @param array $cpts List of postypes. Could by passed in config file.
+		 * @return void
+		 */
+		public function sitemap($cpts = [])
 		{
+			if (empty($cpts)) {
+				$cpts = $this->_get_value_from_config('sitemap', 'array', ['post', 'page']);
+			}
+
 			require_once "class-naswp-sitemap.php";
 			$sitemap = new NasWP_Sitemap($cpts);
 			$sitemap->init();
 		}
 
 		/**
-		 * Get value from config and check its type. Die with error if doesn't exist or pass the gettype test.
+		 * Get value from config and check its type. Die with error if no default value provided.
 		 * @param string $key Value key.
 		 * @param string $type Value type.
+		 * @param mixed $default Default value.
 		 * @return mixed
 		 */
-		private function _get_value_from_config(string $key, string $type = 'string')
+		private function _get_value_from_config(string $key, string $type = 'string', $default = false)
 		{
 			if (isset($this->_config[$key])) {
 				$value = $this->_config[$key];
@@ -75,11 +90,20 @@ if (!class_exists('NasWP_Helpers')) {
 					return $value;
 				} else {
 					trigger_error("NasWP_Helpers: Incorect value type declared for config key $key", E_USER_WARNING);
-					die();
+					if ($default) {
+						return $default;
+					} else {
+						die();
+					}
 				}
 			}
-			trigger_error("NasWP_Helpers: Parameter for $key not declared in config file or passed in the function.", E_USER_WARNING);
-			die();
+
+			if ($default) {
+				return $default;
+			} else {
+				trigger_error("NasWP_Helpers: Parameter for $key not declared in config file or passed in the function.", E_USER_WARNING);
+				die();
+			}
 		}
 
 		/**
