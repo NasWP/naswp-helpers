@@ -27,6 +27,14 @@ if (!class_exists('NasWP_Helpers')) {
 		{
 			$this->_load_config($config_path);
 		}
+
+		public function file_names()
+		{
+			require_once "class-naswp-file-names.php";
+			$filenames = new NasWP_FileNames();
+			$filenames->init();
+		}
+
 		/**
 		 * Load GA
 		 * @param string $id  GA ID. Could by passed in config file.
