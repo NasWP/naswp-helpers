@@ -30,7 +30,7 @@ if (!class_exists('NasWP_Helpers')) {
 
 		public function auto_async_js()
 		{
-			require_once "class-naswp-auto-async-js.php";
+			require_once "inc/class-naswp-auto-async-js.php";
 			$async = new NasWP_AutoAsyncJS();
 			$async->init();
 		}
@@ -51,14 +51,14 @@ if (!class_exists('NasWP_Helpers')) {
 				$allow_custom_gradients = $this->_get_value_from_config('allow_custom_gradients', 'boolean', true);
 			}
 
-			require_once "class-naswp-colors.php";
+			require_once "inc/class-naswp-colors.php";
 			$colors_obj = new NasWP_Colors($colors, $allow_custom_colors, $gradients, $allow_custom_gradients);
 			$colors_obj->init();
 		}
 
 		public function file_names()
 		{
-			require_once "class-naswp-file-names.php";
+			require_once "inc/class-naswp-file-names.php";
 			$filenames = new NasWP_FileNames();
 			$filenames->init();
 		}
@@ -73,7 +73,7 @@ if (!class_exists('NasWP_Helpers')) {
 			if (empty($id)) {
 				$id = $this->_get_value_from_config('ga');
 			}
-			require_once "class-naswp-ga.php";
+			require_once "inc/class-naswp-ga.php";
 			$ga = new NasWP_GA($id);
 			$ga->init();
 		}
@@ -87,7 +87,7 @@ if (!class_exists('NasWP_Helpers')) {
 			if (empty($id)) {
 				$id = $this->_get_value_from_config('gtm');
 			}
-			require_once "class-naswp-gtm.php";
+			require_once "inc/class-naswp-gtm.php";
 			$gtm = new NasWP_GTM($id);
 			$gtm->init();
 		}
@@ -102,7 +102,7 @@ if (!class_exists('NasWP_Helpers')) {
 
 			// TODO Jak vyřešit cestu ke zdrojovým souborům?
 
-			require_once "class-naswp-lightbox.php";
+			require_once "inc/class-naswp-lightbox.php";
 			$lightbox = new NasWP_Lightbox($path_to_helpers);
 			$lightbox->init();
 		}
@@ -119,21 +119,21 @@ if (!class_exists('NasWP_Helpers')) {
 				$formats_array = $this->_get_value_from_config('mimes', 'array');
 			}
 
-			require_once "class-naswp-mimes.php";
+			require_once "inc/class-naswp-mimes.php";
 			$mimes = new NasWP_Mimes($formats_array);
 			$mimes->init();
 		}
 
 		public function protected_member($protected_prefix = false)
 		{
-			require_once "class-naswp-protected-member.php";
+			require_once "inc/class-naswp-protected-member.php";
 			$protected_member = new NasWP_Protected_Member($protected_prefix);
 			$protected_member->init();
 		}
 
 		public function seo()
 		{
-			require_once "class-naswp-seo.php";
+			require_once "inc/class-naswp-seo.php";
 			$seo = new NasWP_SEO();
 			$seo->init();
 		}
@@ -149,7 +149,7 @@ if (!class_exists('NasWP_Helpers')) {
 				$cpts = $this->_get_value_from_config('sitemap', 'array', ['post', 'page']);
 			}
 
-			require_once "class-naswp-sitemap.php";
+			require_once "inc/class-naswp-sitemap.php";
 			$sitemap = new NasWP_Sitemap($cpts);
 			$sitemap->init();
 		}
