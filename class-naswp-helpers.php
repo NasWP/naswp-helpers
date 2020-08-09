@@ -28,6 +28,22 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
+
+		/**
+		 * Load lightbos
+		 * @param mixed $path_to_helpers The path to helpers.
+		 * @return void
+		 */
+		public function lightbox($path_to_helpers)
+		{
+
+			// TODO Jak vyřešit cestu ke zdrojovým souborům?
+
+			require_once "class-naswp-lightbox.php";
+			$lightbox = new NasWP_Lightbox($path_to_helpers);
+			$lightbox->init();
+		}
+
 		/**
 		 * Allow selected mime types.
 		 * @param array $formats_array Mime types keyed by the file extension regex corresponding to those types. Could by passed in config file.
