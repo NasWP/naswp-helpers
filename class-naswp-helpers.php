@@ -27,10 +27,37 @@ if (!class_exists('NasWP_Helpers')) {
 		{
 			$this->_load_config($config_path);
 		}
-
+		/**
+		 * Load GA
+		 * @param string $id  GA ID. Could by passed in config file.
+		 * @return void
+		 */
+		public function ga($id = '')
+		{
+			if (empty($id)) {
+				$id = $this->_get_value_from_config('ga');
+			}
+			require_once "class-naswp-ga.php";
+			$ga = new NasWP_GA($id);
+			$ga->init();
+		}
+		/**
+		 * Load GTM
+		 * @param string $id  GTM ID. Could by passed in config file.
+		 * @return void
+		 */
+		public function gtm($id = '')
+		{
+			if (empty($id)) {
+				$id = $this->_get_value_from_config('gtm');
+			}
+			require_once "class-naswp-gtm.php";
+			$gtm = new NasWP_GTM($id);
+			$gtm->init();
+		}
 
 		/**
-		 * Load lightbos
+		 * Load lightbox
 		 * @param mixed $path_to_helpers The path to helpers.
 		 * @return void
 		 */
