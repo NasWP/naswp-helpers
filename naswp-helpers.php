@@ -15,7 +15,7 @@ if (!class_exists('NasWP_Helpers')) {
 		 * Config
 		 * @var array
 		 */
-		private $config = [];
+		private $_config = [];
 
 		/**
 		 * Construct
@@ -25,8 +25,7 @@ if (!class_exists('NasWP_Helpers')) {
 		 */
 		function __construct(string $config_path = '')
 		{
-			$this->load_config($config_path);
-			var_dump($this->config);
+			$this->_load_config($config_path);
 		}
 
 		/**
@@ -34,7 +33,7 @@ if (!class_exists('NasWP_Helpers')) {
 		 * @param string $config_path Location of the config file.
 		 * @return bool Whether the config was loaded or not.
 		 */
-		private function load_config(string $config_path = '')
+		private function _load_config(string $config_path = '')
 		{
 			if ($config_path) {
 
