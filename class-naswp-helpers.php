@@ -35,19 +35,19 @@ if (!class_exists('NasWP_Helpers')) {
 			$async->init();
 		}
 
-		public function colors($colors = [], $allow_custom_colors = false, $gradients = [], $allow_custom_gradients = false)
+		public function colors($colors = [], $allow_custom_colors = null, $gradients = [], $allow_custom_gradients = null)
 		{
 
 			if (empty($colors)) {
 				$colors = $this->_get_value_from_config('colors', 'array');
 			}
-			if (!$allow_custom_colors) {
+			if ($allow_custom_colors === null) {
 				$allow_custom_colors = $this->_get_value_from_config('allow_custom_colors', 'boolean', true);
 			}
 			if (empty($gradients)) {
 				$gradients = $this->_get_value_from_config('gradients', 'array', null);
 			}
-			if (!$allow_custom_gradients) {
+			if ($allow_custom_gradients === null) {
 				$allow_custom_gradients = $this->_get_value_from_config('allow_custom_gradients', 'boolean', true);
 			}
 
@@ -161,7 +161,7 @@ if (!class_exists('NasWP_Helpers')) {
 		 * @param mixed $default Default value.
 		 * @return mixed
 		 */
-		private function _get_value_from_config(string $key, string $type = 'string', $default = false)
+		private function _get_value_from_config(string $key, string $type = 'string', $default = '')
 		{
 			if (isset($this->_config[$key])) {
 				$value = $this->_config[$key];
@@ -177,7 +177,7 @@ if (!class_exists('NasWP_Helpers')) {
 				}
 			}
 
-			if ($default) {
+			if ('' === $default) {
 				return $default;
 			} else {
 				trigger_error("NasWP_Helpers: Parameter for $key not declared in config file or passed in the function.", E_USER_WARNING);
