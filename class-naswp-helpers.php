@@ -28,8 +28,13 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
-		public function mimes($formats_array)
+		public function mimes($formats_array = [])
 		{
+
+			if (empty($formats_array)) {
+				$formats_array = $this->_get_value_from_config('mimes', 'array');
+			}
+
 			require_once "class-naswp-mimes.php";
 			$mimes = new NasWP_Mimes($formats_array);
 			$mimes->init();
@@ -57,6 +62,27 @@ if (!class_exists('NasWP_Helpers')) {
 		}
 
 		/**
+		 * Get value from config and check its type. Die with error if doesn't exist or pass the gettype test.
+		 * @param string $key Value key.
+		 * @param string $type Value type.
+		 * @return mixed
+		 */
+		private function _get_value_from_config(string $key, string $type = 'string')
+		{
+			if (isset($this->_config[$key])) {
+				$value = $this->_config[$key];
+				if (gettype($value) === $type) {
+					return $value;
+				} else {
+					trigger_error("NasWP_Helpers: Incorect value type declared for config key $key", E_USER_WARNING);
+					die();
+				}
+			}
+			trigger_error("NasWP_Helpers: Parameter for $key not declared in config file or passed in the function.", E_USER_WARNING);
+			die();
+		}
+
+		/**
 		 * Load & parse config file
 		 * @param string $config_path Location of the config file.
 		 * @return bool Whether the config was loaded or not.
@@ -74,7 +100,7 @@ if (!class_exists('NasWP_Helpers')) {
 				// Load content.
 				$config_loaded = file_get_contents($config_path);
 				if ($config_loaded) {
-					$this->config =	json_decode($config_loaded, true);
+					$this->_config =	json_decode($config_loaded, true);
 					return true;
 				}
 			}
