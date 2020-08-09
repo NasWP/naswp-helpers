@@ -1,0 +1,23 @@
+{
+  "sitemap": [
+    "page"
+  ],
+  "mimes": {
+    "svg": "image/svg+xml"
+  },
+  "ga": "UA-00000000",
+  "gtm": "GTM-00000000",
+  "colors": {
+    "Light": "#EAF7FF",
+    "Blue Light": "#96D8FF",
+    "Blue Dark": "#0459AA",
+    "Dark": "#002140",
+    "Blue Bright": "#00B7FF"
+  },
+  "allow_custom_colors": true,
+  "gradients": {
+    "Light": "linear-gradient(90deg, rgba(0,183,255,1) 0%, rgba(4,89,170,1) 100%)",
+    "Dark": "linear-gradient(90deg, rgba(4,89,170,1) 0%, rgba(0,33,64,1) 100%)"
+  },
+  "allow_custom_gradients": true
+}
