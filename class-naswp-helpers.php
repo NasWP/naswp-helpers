@@ -28,6 +28,13 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
+		public function seo()
+		{
+			require_once "class-naswp-seo.php";
+			$seo = new NasWP_SEO();
+			$seo->init();
+		}
+
 		/**
 		 * Load & parse config file
 		 * @param string $config_path Location of the config file.
