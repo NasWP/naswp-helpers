@@ -28,6 +28,13 @@ if (!class_exists('NasWP_Helpers')) {
 			$this->_load_config($config_path);
 		}
 
+		public function auto_async_js()
+		{
+			require_once "class-naswp-auto-async-js.php";
+			$async = new NasWP_AutoAsyncJS();
+			$async->init();
+		}
+
 		public function file_names()
 		{
 			require_once "class-naswp-file-names.php";
