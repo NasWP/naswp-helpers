@@ -12,7 +12,7 @@ if (!class_exists('NasWP_FileNames')) {
 
 		public function init()
 		{
-			add_action('sanitize_file_name', array($this, 'sanitize'));
+			add_filter('sanitize_file_name', array($this, 'sanitize'));
 		}
 
 		public function sanitize($filename)
